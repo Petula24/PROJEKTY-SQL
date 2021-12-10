@@ -1,18 +1,18 @@
 
-#PoËet proveden˝ch test˘:                  
+#Poƒçet proveden√Ωch test√π:                  
 CREATE OR REPLACE TABLE provedene_testy AS
 SELECT tests_performed, country, `date`   
 FROM covid19_tests AS ct;      
 
 
-# Bin·rnÌ promÏnn· pro vÌkend/vöednÌ≠ den (1_0): 
+# Bin√°rn√≠ promƒõnn√° pro v√≠kend/v≈°edn√≠ den (1_0): 
 CREATE OR REPLACE TABLE binarni_promenna AS         
 SELECT date,                                            
 	country,                                            
 	confirmed,                                          
 	CASE WHEN weekday(`date`) in (5, 6) THEN 1          
 	ELSE 0 END AS weekend,                              
-	# roËnÌ obdobÌ danÈho dne:                
+	# ro√®n√≠ obdob√≠ dan√©ho dne:                
 	CASE WHEN month(`date`) BETWEEN 1 AND 3 THEN 0      
 		WHEN month(`date`) BETWEEN 4 AND 6 THEN 1       
 		WHEN month(`date`) BETWEEN 7 AND 9 THEN 2       
@@ -21,14 +21,14 @@ SELECT date,
 FROM covid19_basic_differences AS base
 
 
-# Hustota zalidnÏnÌ:
+# Hustota zalidnƒõn√≠:
 CREATE OR REPLACE TABLE hustota_zalidneni AS
 SELECT country, population         
 FROM lookup_table AS lt      
 WHERE province IS NULL; 
 
 
-#HDP, GINI koeficient, dÏtsk· ˙mrtnost:
+#HDP, GINI koeficient, dƒõtsk√° √∫mrtnost:
 CREATE OR REPLACE TABLE z_economies AS
 SELECT DISTINCT                                           
  	e.country,                                       
@@ -39,7 +39,7 @@ FROM economies AS e
 WHERE `year` = 2020
   
 
-# Medi·n vÏku obyvatel 2018:
+# Medi√°n vƒõku obyvatel 2018:
 CREATE OR REPLACE TABLE median AS
 SELECT country,                                           
 	round(median_age_2018,2) AS median_vek           
@@ -47,7 +47,7 @@ FROM countries AS c
 )  
 
 
-#Podil n·boûenstvÌ:
+#Podil n√°bo≈æenstv√≠:
 CREATE OR REPLACE TABLE v_podil_nabozenstvi AS                                                                              
 WITH krestanstvi AS (                                                                                           
 	SELECT country, population                                                                                  
@@ -132,7 +132,7 @@ LEFT JOIN nepridr_nab AS n
 	ON n.country = rel_2020.country;   
 
 
-# Rozdil mezi oËek·vanou dobou doûitÌ v r. 1965 a v roce 2015:
+# Rozdil mezi oƒçek√°vanou dobou do≈æit√≠ v r. 1965 a v roce 2015:
 CREATE OR REPLACE TABLE rozdil_doziti AS                                                                                             
 SELECT                                                            
 	country, `year`,                                              
@@ -149,7 +149,7 @@ JOIN life_expectancy AS le
 WHERE le.`year` = 1965;
 
 
-#Pr˘mÏrn· dennÌ teplota:
+#Pr≈Ømƒõrn√° denn√≠ teplota:
 CREATE OR REPLACE TABLE prum_den_tepl AS
 SELECT                                                                           
 		`date`                                                   
@@ -161,7 +161,7 @@ GROUP BY date, city
 )
 
 
-# NulovÈ sr·ûky:
+# Nulov√© sr√°≈æky:
 CREATE OR REPLACE TABLE nulove_srazky AS
 SELECT date, city,                                               
 		sum(poc_hodin) AS pocet                                  
@@ -176,7 +176,7 @@ GROUP BY `date`, city
 )
 
 
-# Maxim·lnÌ sÌla vÏtru:
+# Maxim√°ln√≠ s√≠la vƒõtru:
 CREATE OR REPLACE TABLE AS
 SELECT                                                                   
 	date,                                               
@@ -230,7 +230,7 @@ INSERT INTO t_mesta (mesta, mesta_as)
 ALTER TABLE t_mesta CONVERT TO CHARACTER set utf8mb4 COLLATE 'utf8mb4_general_ci';
 
                                                                                  
-# Tabulka zeme:                                                                   
+# Tabulka zemƒõ:                                                                   
 CREATE OR REPLACE TABLE t_zeme(                                                  
 	zeme text(255),                                                              
 	zeme_as text(255)                                                            
@@ -273,7 +273,7 @@ INSERT INTO t_zeme(zeme, zeme_as)
 ALTER TABLE t_zeme CONVERT TO CHARACTER set utf8mb4 COLLATE 'utf8mb4_general_ci';
 
 
-# 1. Ë·st:
+# 1. ƒç√°st:
 CREATE OR REPLACE TABLE t_cast_1         
 SELECT DISTINCT                          
 	pt.tests_performed,                  
@@ -287,7 +287,7 @@ JOIN binarni_promenna AS bp
 	AND pt.`date` = bp.`date`; 
 
 
-# 2. Ë·st:
+# 2. ƒç√°st:
 CREATE OR REPLACE TABLE t_cast_2 
 SELECT 
 	hz.population,
@@ -315,7 +315,7 @@ JOIN delka_zivota AS dz
 	ON hz.country = dz.country; 
 
 
-# 3. Ë·st:
+# 3. ƒç√°st:
 CREATE OR REPLACE TABLE t_cast_3               
 SELECT                                         
 	pdt.prumer,                                
@@ -331,7 +331,7 @@ JOIN max_sila_vetru AS msv
 	AND pdt.city = msv.city;                   	
 	
     
-# SpojenÌ tabulek:
+# Spojen√≠ tabulek:
 CREATE OR REPLACE TABLE spoje_tab         
 SELECT                                    
 	tc2.*,                                
@@ -349,7 +349,7 @@ JOIN t_mesta AS tm
 	ON tm.mesta = tc3.city;
 
 
-# Fin·lnÌ tabulka
+# Fin√°ln√≠ tabulka
 CREATE OR REPLACE TABLE t_Zikmundova_final_sql_project
 SELECT DISTINCT                                       
 	tc1.country,                                      
