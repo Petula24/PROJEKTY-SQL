@@ -1,0 +1,37 @@
+Sportovní sázení – Analýza a správa dat
+
+Cíl projektu: Vytvořit databázi, která umožňuje:
+
+Spravovat data o zápasech, sázkách, uživatelích a výsledcích.
+Analyzovat sázky a generovat reporty, například úspěšnost sázkařů, celkový zisk a přehled sázek na různé sporty
+Struktura databáze: Tabulky:
+
+Users
+user_id (INT, PRIMARY KEY)
+name (VARCHAR(100))
+email (VARCHAR(100))
+registration_date (DATE)
+Matches
+match_id (INT, PRIMARY KEY)
+sport (VARCHAR(50))
+team_a (VARCHAR(100))
+team_b ( VARCHAR(100)
+match_date (DATETIME)
+result (VARCHAR(20))
+Bets
+bet_id (INT, PRIMARY KEY)
+user_id (INT, FOREIGN KEY -> Users(user_id))
+match_id (INT, FOREIGN KEY -> Matches(match_id))
+bet_type (VARCHAR(50))
+status (Varchar(20))
+Transactions
+transaction_id (INT, PRIMARY KEY)
+user_id (INT, FOREIGN KEY -> Users(user_id))
+amount (DECIMAL(10,2))
+transaction_date (DATETIME)
+Příklady SQL dotazů:
+
+Celkový zisk společnosti na sázkách
+Top 5 uživatelů podle počtu výher
+Průměrná sázka na konkrétní sport
+Nejčastější typ sázky
