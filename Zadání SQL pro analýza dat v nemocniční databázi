@@ -1,0 +1,57 @@
+Analýza dat v nemocniční databázi:
+
+Jsi IT analytik v nemocničním zařízení a tvým úkolem je vytvořit analýzu dat pro lepší pochopení provozu nemocnice. 
+Máš k dispozici databázi obsahující údaje o pacientech, lékařích, odděleních, diagnózách a hospitalizacích.
+
+Struktura databáze (nutno vytvořit):
+
+Tabulka Pacienti:
+Id pacienta – int, PK
+Křestní jméno – VARCHAR
+Příjmení – VARCHAR
+Datum narození – DATE
+Pohlaví – (CHAR(1) – pohlaví (M nebo F)
+
+Tabulka lékaři:
+Id lékaře – INT, PK
+Křestní jméno – VARCHAR
+Příjmení – VARCHAR
+Specializace – VARCHAR
+
+Tabulka oddělení:
+Id oddělení – INT, PK
+Název oddělení
+
+Tabulka hospitalizace:
+Id hospitalizace – INT, PK
+Id pacienta – INT, FK
+Id lékaře – INT, FK
+Id oddělení – INT, FK
+Datum přijetí – DATE
+Datum propuštění – DATUM – může být null
+
+Tabulka diagnózy:
+Id diagnozy – INT, PK
+Id hospitalizace – INT, FK
+Kód diagnózy – VARCHAR
+Popis diagnózy – VARCHAR
+
+Základní dotazy:
+Seznam všech pacientů starších 60 let
+Počet hospitalizací za posledních 12 měsíců
+Seznam všech lékařů a počet pacientů, které ošetřovali
+
+Analýza dat:
+Kolik dní průměrně trvá hospitalizace na jednotlivých odděleních?
+Které diagnózy jsou nejčastější na oddělení kardiologie?
+Jaké je procento pacientů, kteří mají více než jednu hospitalizaci za poslední rok?
+
+Pokročilé úkoly:
+Vytvoř dotaz, který ukáže nejvytíženějšího lékaře (podle počtu hospitalizací)
+Vytvoř report, který ukazuje počet hospitalizací podle měsíců za poslední dva roky
+Najdi pacienty, kteří byli hospitalizováni na více než jednom oddělení během jedné hospitalizace.
+Dodatečně požadavky:
+
+Navrhni a vytvoř databázové schéma pro výše uvedené tabulky
+Data zkus obohatit o vlastní vzorová data (např. 50 pacientů, 20 lékařů, 5 oddělení, 100 hospitalizací),
+Všechny dotazy otestuj a zkontroluj výsledky
